@@ -27,7 +27,7 @@ pip install uv
 
 Install the `nomad-lab` package:
 ```sh
-uv pip install '.[dev]' --index-url https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple
+uv pip install "nomad-lab[dev]==v1.3.7.dev43+gb3af99c0e" --index-url https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple
 ```
 
 **Note!**
@@ -36,7 +36,7 @@ sure to include NOMAD's internal package registry (via `--index-url` in the abov
 
 The plugin is still under development. If you would like to contribute, install the package in editable mode (with the added `-e` flag):
 ```sh
-uv pip install -e '.[dev]' --index-url https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple
+uv pip install "nomad-lab[dev]==v1.3.7.dev43+gb3af99c0e" --index-url https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple
 ```
 
 
