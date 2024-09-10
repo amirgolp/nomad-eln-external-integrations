@@ -1,0 +1,2 @@
+recursive-include * nomad_plugin.yaml
+graft src/nomad_eln_external_integrations/example_uploads
