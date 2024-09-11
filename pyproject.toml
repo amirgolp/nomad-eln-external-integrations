@@ -108,10 +108,10 @@ package-dir = { "" = "src" }
 where = ["src"]
 
 [project.entry-points.'nomad.plugin']
+elabftwparser = "elabftw_parser_entry_point.parsers
 parser_entry_point = "nomad_eln_external_integrations.parsers:parser_entry_point"
 schema_package_entry_point = "nomad_eln_external_integrations.schema_packages:schema_package_entry_point"
 normalizer_entry_point = "nomad_eln_external_integrations.normalizers:normalizer_entry_point"
-app_entry_point = "nomad_eln_external_integrations.apps:app_entry_point"
 example_upload_entry_point = "nomad_eln_external_integrations.example_uploads:example_upload_entry_point"
 [tool.cruft]
 # Avoid updating workflow files, this leads to permissions issues
