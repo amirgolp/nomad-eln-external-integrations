@@ -339,15 +339,6 @@ _element_type_section_mapping = {'File': ELabFTWFile, 'Dataset': ElabFTWDataset}
 class ELabFTWParser(MatchingParser):
     creates_children = True
 
-    def __init__(self) -> None:
-        super().__init__(
-            name='parsers/elabftw_parser',
-            code_name='ElabFTW',
-            domain=None,
-            mainfile_mime_re=r'text/plain|application/json|text/html',
-            mainfile_name_re=r'.*ro-crate-metadata.json$',
-        )
-
     def is_mainfile(
         self,
         filename: str,

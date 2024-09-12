@@ -22,7 +22,7 @@ import logging
 
 from nomad.utils import configure_logging
 from nomad.datamodel import EntryArchive
-from nomad_eln_external_integration.parsers.elabftw import ELabFTWParser
+from nomad_eln_external_integrations.parsers.elabftw import ELabFTWParser
 
 if __name__ == '__main__':
     configure_logging(console_log_level=logging.DEBUG)
