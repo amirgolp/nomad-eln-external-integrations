@@ -2,7 +2,6 @@ from nomad.config.models.plugins import ParserEntryPoint
 
 
 class ElabftwEntryPoint(ParserEntryPoint):
-
     def load(self):
         from nomad_eln_external_integrations.parsers.elabftw import ELabFTWParser
 
