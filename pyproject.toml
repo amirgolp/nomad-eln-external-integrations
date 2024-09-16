@@ -25,7 +25,7 @@ maintainers = [
     { name = "Amir Golparvar", email = "amir.golparvar@physuk.hu-berlin.de" },
 ]
 license = { file = "LICENSE" }
-dependencies = ["nomad-lab>=1.3.0"]
+dependencies = ["nomad-lab>=1.3.0", "nomad-openbis==1.0.0"]
 
 [project.urls]
 Repository = "https://github.com/amirgolp/nomad-eln-external-integrations"
@@ -109,7 +109,9 @@ where = ["src"]
 
 [project.entry-points.'nomad.plugin']
 elabftwparser = "nomad_eln_external_integrations.parsers:elabftw_parser_entry_point"
+chemotionparser = "nomad_eln_external_integrations.parsers:chemotion_parser_entry_point"
 labfolderschema = "nomad_eln_external_integrations.schema_packages.labfolder:schema"
+openbisschema = "nomad_eln_external_integrations.schema_packages.openbis:schema"
 example_upload_entry_point = "nomad_eln_external_integrations.example_uploads:example_upload_entry_point"
 [tool.cruft]
 # Avoid updating workflow files, this leads to permissions issues

@@ -17,3 +17,21 @@ elabftw_parser_entry_point = ElabftwEntryPoint(
     mainfile_mime_re=r'text/plain|application/json|text/html',
     mainfile_name_re=r'.*ro-crate-metadata.json$',
 )
+
+
+class ChemotionEntryPoint(ParserEntryPoint):
+    def load(self):
+        from nomad_eln_external_integrations.parsers.chemotion import ChemotionParser
+
+        return ChemotionParser(**self.dict())
+
+
+chemotion_parser_entry_point = ElabftwEntryPoint(
+    name='parsers/chemotion',
+    aliases=['parsers/chemotion'],
+    code_name='chemotion',
+    code_homepage='https://chemotion.net/',
+    description='NOMAD parser for chemotion data.',
+    mainfile_mime_re=r'application/json|text/plain',
+    mainfile_name_re=r'^.*export.json$',
+)
