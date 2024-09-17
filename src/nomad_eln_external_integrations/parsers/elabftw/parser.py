@@ -317,7 +317,7 @@ class ELabFTW(EntryData):
     project_id = Quantity(type=str, description='Project ID')
     status = Quantity(
         type=MEnum(
-            'Not set', 'Running', 'Waiting', 'Success', 'Need to be redone', 'Fail'
+            'Not set', 'Running', 'Waiting', 'Success', 'Need to be redone', 'Fail', 'Maintenance mode'
         ),
         description='Status of the Experiment',
     )

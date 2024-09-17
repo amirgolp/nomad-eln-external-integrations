@@ -111,6 +111,7 @@ where = ["src"]
 elabftwparser = "nomad_eln_external_integrations.parsers:elabftw_parser_entry_point"
 chemotionparser = "nomad_eln_external_integrations.parsers:chemotion_parser_entry_point"
 labfolderschema = "nomad_eln_external_integrations.schema_packages.labfolder:schema"
+elabftwschema = "nomad_eln_external_integrations.schema_packages.elabftw:schema"
 openbisschema = "nomad_eln_external_integrations.schema_packages.openbis:schema"
 example_upload_entry_point = "nomad_eln_external_integrations.example_uploads:example_upload_entry_point"
 [tool.cruft]
