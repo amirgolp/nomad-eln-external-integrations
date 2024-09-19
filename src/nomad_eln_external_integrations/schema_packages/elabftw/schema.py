@@ -46,7 +46,7 @@ m_package = SchemaPackage()
 
 
 class ElabftwImportError(Exception):
-    "elabftw-normalizer related errors"
+    """elabftw-normalizer related errors"""
 
     pass
 
@@ -288,7 +288,7 @@ def _remove_spaces_from_keys(data):
         new_dict = {}
         for key, value in data.items():
             if isinstance(key, str):
-                new_key = key.replace(" ", "")
+                new_key = key.replace(' ', '')
             else:
                 new_key = key
             new_dict[new_key] = _remove_spaces_from_keys(value)
@@ -321,7 +321,7 @@ def _clean_jmespath_expression(expr: str) -> str:
             key = match.group(1)
             index = match.group(2) if match.group(2) else ''
             cleaned_key = key.replace(' ', '')
-            cleaned_part = f"{cleaned_key}{index}"
+            cleaned_part = f'{cleaned_key}{index}'
             cleaned_parts.append(cleaned_part)
         else:
             cleaned_parts.append(part)
