@@ -16,12 +16,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-import sys
 import json
 import logging
+import sys
 
-from nomad.utils import configure_logging
 from nomad.datamodel import EntryArchive
+from nomad.utils import configure_logging
+
 from nomad_eln_external_integrations.parsers.elabftw import ELabFTWParser
 
 if __name__ == '__main__':

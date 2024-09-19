@@ -17,9 +17,9 @@
 #
 
 import pytest
+from nomad.datamodel import EntryArchive, EntryMetadata
 
 from src.nomad_eln_external_integrations.parsers.elabftw import ELabFTWParser
-from nomad.datamodel import EntryArchive, EntryMetadata
 
 
 @pytest.fixture(scope='module')

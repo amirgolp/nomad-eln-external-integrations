@@ -18,15 +18,15 @@
 import os
 
 from nomad.config import config
+from nomad.datamodel.data import ElnIntegrationCategory, EntryData
 from nomad.metainfo import (
-    MSection,
-    Section,
-    Quantity,
-    SubSection,
     Datetime,
+    MSection,
+    Quantity,
     SchemaPackage,
+    Section,
+    SubSection,
 )
-from nomad.datamodel.data import EntryData, ElnIntegrationCategory
 
 configuration = config.get_plugin_entry_point(
     'nomad_eln_external_integrations.schema_packages.openbis:schema'
@@ -111,7 +111,7 @@ class OpenbisEntry(EntryData):
     m_def = Section(label='Openbis Project Import', categories=[ElnIntegrationCategory])
 
     def __init__(self, *args, **kwargs):
-        super(OpenbisEntry, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.logger = None
 
     project_url = Quantity(type=str, a_eln=dict(component='StringEditQuantity'))
@@ -130,7 +130,7 @@ class OpenbisEntry(EntryData):
         archive.data.password = None
 
     def normalize(self, archive, logger):
-        super(OpenbisEntry, self).normalize(archive, logger)
+        super().normalize(archive, logger)
         self.logger = logger
 
         if not self.project_url or not self.username or not self.password:

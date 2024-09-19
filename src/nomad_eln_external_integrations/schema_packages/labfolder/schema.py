@@ -16,26 +16,25 @@
 # limitations under the License.
 #
 import json
-import yaml
-import requests
 import re
-from urllib.parse import urlparse, parse_qs
-from lxml.html.clean import clean_html  # pylint: disable=no-name-in-module
+from urllib.parse import parse_qs, urlparse
 
+import requests
+import yaml
+from lxml.html.clean import clean_html  # pylint: disable=no-name-in-module
+from nomad.config import config
+from nomad.datamodel.data import ElnIntegrationCategory, EntryData
 from nomad.metainfo import (
-    MSection,
-    Section,
-    Quantity,
-    SubSection,
+    JSON,
     Datetime,
     MEnum,
-    JSON,
+    MSection,
+    Quantity,
     Reference,
+    Section,
+    SubSection,
 )
-from nomad.datamodel.data import EntryData, ElnIntegrationCategory
-from nomad.metainfo.metainfo import SectionProxy, SchemaPackage
-
-from nomad.config import config
+from nomad.metainfo.metainfo import SchemaPackage, SectionProxy
 
 configuration = config.get_plugin_entry_point(
     'nomad_eln_external_integrations.schema_packages.labfolder:schema'
@@ -312,7 +311,7 @@ class LabfolderProject(EntryData):
     )
 
     def __init__(self, *args, **kwargs):
-        super(LabfolderProject, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         self.__headers = None
         self.logger = None
@@ -388,7 +387,7 @@ class LabfolderProject(EntryData):
                 yaml.dump(dict(data=archive.data.m_to_dict()), f)
 
     def normalize(self, archive, logger):
-        super(LabfolderProject, self).normalize(archive, logger)
+        super().normalize(archive, logger)
         self.logger = logger
         if not self.entries:
             self.resync_labfolder_repository = True

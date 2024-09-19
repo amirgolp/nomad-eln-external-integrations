@@ -20,14 +20,15 @@ import copy
 import json
 import os
 import re
-from typing import Union, Iterable
+from collections.abc import Iterable
+from typing import Union
 
-from nomad.datamodel import EntryArchive, Results, ArchiveSection, EntryData
+from nomad import utils
+from nomad.datamodel import ArchiveSection, EntryArchive, EntryData, Results
 from nomad.datamodel.data import ElnIntegrationCategory
 from nomad.datamodel.metainfo.annotations import ELNAnnotation
-from nomad.metainfo import MSection, Quantity, Datetime, JSON, SubSection, Section
-from nomad.metainfo.util import camel_case_to_snake_case, MEnum
-from nomad import utils
+from nomad.metainfo import JSON, Datetime, MSection, Quantity, Section, SubSection
+from nomad.metainfo.util import MEnum, camel_case_to_snake_case
 from nomad.parsing import MatchingParser
 
 
@@ -191,7 +192,7 @@ class ELabFTWExperimentData(MSection):
         res_ids = [('database', exp.itemid) for exp in self.items_links]
 
         for item in exp_ids + res_ids:
-            from nomad.search import search, MetadataPagination
+            from nomad.search import MetadataPagination, search
 
             query = {'external_id': item[1]}
             search_result = search(
@@ -359,7 +360,7 @@ class ELabFTWParser(MatchingParser):
         if not is_ro_crate:
             return False
         try:
-            with open(filename, 'rt') as f:
+            with open(filename) as f:
                 data = json.load(f)
         except Exception:
             return False
@@ -369,7 +370,7 @@ class ELabFTWParser(MatchingParser):
                 item.get('@type') == 'SoftwareApplication' for item in data['@graph']
             ):
                 root_experiment = next(
-                    (item for item in data['@graph'] if item.get('@id') == './')
+                    item for item in data['@graph'] if item.get('@id') == './'
                 )
                 no_of_experiments = len(root_experiment['hasPart'])
             else:
@@ -388,7 +389,7 @@ class ELabFTWParser(MatchingParser):
         title_pattern = re.compile(r'^\d{4}-\d{2}-\d{2} - ([a-zA-Z0-9\-]+) - .*$')
 
         lab_ids: list[tuple[str, str]] = []
-        with open(mainfile, 'rt') as f:
+        with open(mainfile) as f:
             data = json.load(f)
 
         snake_case_data = camel_case_to_snake_case(data)
@@ -487,10 +488,10 @@ def _parse_legacy(
 
     path_to_export_json = os.path.join(mainfile_raw_path, exp_id, 'export-elabftw.json')
     try:
-        with open(path_to_export_json, 'rt') as f:
+        with open(path_to_export_json) as f:
             export_data = json.load(f)
     except FileNotFoundError:
-        raise ELabFTWParserError(f"Couldn't find export-elabftw.json file.")
+        raise ELabFTWParserError("Couldn't find export-elabftw.json file.")
 
     def clean_nones(value):
         if isinstance(value, list):
@@ -506,9 +507,7 @@ def _parse_legacy(
     try:
         experiment_data.m_update_from_dict(clean_nones(export_data[0]))
     except (IndexError, KeyError, TypeError):
-        logger.warning(
-            f"Couldn't read and parse the data from export-elabftw.json file"
-        )
+        logger.warning("Couldn't read and parse the data from export-elabftw.json file")
     try:
         experiment_data.extra_fields = export_data[0]['metadata']['extra_fields']
     except Exception:

@@ -16,8 +16,8 @@
 # limitations under the License.
 #
 
-import pytest
 import numpy as np
+import pytest
 from nomad.datamodel import EntryArchive, EntryMetadata
 
 from src.nomad_eln_external_integrations.parsers.chemotion.parser import (

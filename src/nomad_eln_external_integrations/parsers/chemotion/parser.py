@@ -15,22 +15,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-import os
-from typing import Union, Iterable
 import json
+import os
+from collections.abc import Iterable
+from typing import Union
 
 import numpy as np
+from nomad import utils
 from nomad.datamodel import EntryArchive, EntryData
 from nomad.datamodel.data import ElnIntegrationCategory
 from nomad.metainfo import (
-    Quantity,
     JSON,
-    MSection,
     Datetime,
+    MSection,
+    Quantity,
     Section,
     SubSection,
 )
-from nomad import utils
 from nomad.metainfo.data_type import m_float16
 from nomad.parsing.parser import MatchingParser
 
@@ -436,7 +437,7 @@ class ChemotionParser(MatchingParser):
 
         chemotion = Chemotion()
 
-        with open(mainfile, 'rt') as f:
+        with open(mainfile) as f:
             data = json.load(f)
 
         for item_name, item_content in data.items():

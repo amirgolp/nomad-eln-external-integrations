@@ -19,23 +19,21 @@ import json
 import math
 import os
 import re
+from urllib.parse import parse_qs, urlparse
 
 import jmespath
 import numpy as np
-import yaml
 import requests
-from urllib.parse import urlparse, parse_qs
-
+import yaml
+from nomad.config import config
+from nomad.datamodel.data import ArchiveSection
 from nomad.metainfo import (
     MSection,
-    Section,
     Quantity,
+    Section,
     SubSection,
 )
-from nomad.datamodel.data import ArchiveSection
-from nomad.metainfo.metainfo import SchemaPackage, Property
-
-from nomad.config import config
+from nomad.metainfo.metainfo import Property, SchemaPackage
 from nomad.units import ureg
 
 configuration = config.get_plugin_entry_point(
@@ -53,7 +51,7 @@ class ElabftwImportError(Exception):
 
 class ElabftwProject(ArchiveSection):
     def __init__(self, *args, **kwargs):
-        super(ElabftwProject, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         self.__headers = None
         self.logger = None
@@ -126,7 +124,7 @@ class ElabftwProject(ArchiveSection):
                 yaml.dump(dict(data=archive.data.m_to_dict()), f)
 
     def normalize(self, archive, logger):
-        super(ElabftwProject, self).normalize(archive, logger)
+        super().normalize(archive, logger)
         self.logger = logger
 
         if self.Sync_Project:
