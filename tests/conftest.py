@@ -15,4 +15,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+import json
 
+from nomad.datamodel import EntryArchive
+from nomad.normalizing import normalizers
+
+
+def run_normalize(entry_archive: EntryArchive) -> EntryArchive:
+    for normalizer_class in normalizers:
+        normalizer = normalizer_class(entry_archive)
+        normalizer.normalize()
+    return entry_archive

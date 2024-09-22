@@ -17,7 +17,6 @@
 #
 import os
 
-from nomad.config import config
 from nomad.datamodel.data import ElnIntegrationCategory, EntryData
 from nomad.metainfo import (
     Datetime,
@@ -26,10 +25,6 @@ from nomad.metainfo import (
     SchemaPackage,
     Section,
     SubSection,
-)
-
-configuration = config.get_plugin_entry_point(
-    'nomad_eln_external_integrations.schema_packages.openbis:schema'
 )
 
 m_package = SchemaPackage()

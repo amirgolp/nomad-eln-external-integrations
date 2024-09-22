@@ -36,9 +36,9 @@ from nomad.metainfo import (
 )
 from nomad.metainfo.metainfo import SchemaPackage, SectionProxy
 
-configuration = config.get_plugin_entry_point(
-    'nomad_eln_external_integrations.schema_packages.labfolder:schema'
-)
+# configuration = config.get_plugin_entry_point(
+#     'nomad_eln_external_integrations.schema_packages.labfolder:schema'
+# )
 
 m_package = SchemaPackage()
 
@@ -380,11 +380,12 @@ class LabfolderProject(EntryData):
         self.password = None
 
         archive = self.m_root()
-        with archive.m_context.raw_file(archive.metadata.mainfile, 'wt') as f:
-            if archive.metadata.mainfile.endswith('json'):
-                json.dump(dict(data=archive.data.m_to_dict()), f)
-            else:
-                yaml.dump(dict(data=archive.data.m_to_dict()), f)
+        if archive.m_context:
+            with archive.m_context.raw_file(archive.metadata.mainfile, 'wt') as f:
+                if archive.metadata.mainfile.endswith('json'):
+                    json.dump(dict(data=archive.data.m_to_dict()), f)
+                else:
+                    yaml.dump(dict(data=archive.data.m_to_dict()), f)
 
     def normalize(self, archive, logger):
         super().normalize(archive, logger)
